@@ -9,11 +9,12 @@ class buffer
 {
     std::string contents_;
     std::string::iterator start_pos_, end_pos_;
+
 public:
     buffer() { }
 
     buffer(std::string contents)
-    : contents_{contents}, start_pos_{std::begin(contents)}, end_pos_{std::begin(contents)}
+    : contents_{contents}, start_pos_{std::begin(contents_)}, end_pos_{std::begin(contents_)}
     { }
 
     void append(const std::string &text)
@@ -46,6 +47,7 @@ class editor_state
 {
     bool run_ = true;
     buffer buf_;
+
 public:
     bool is_running() const
     {
@@ -78,7 +80,7 @@ std::string get_string(int length=255)
 buffer load_file(std::string path)
 {
     std::ifstream in(path);
-    buffer buf = buffer("");
+    buffer buf("");
     std::string line;
     while(std::getline(in, line)) {
         buf.append(line);
@@ -151,3 +153,4 @@ int main(int argc, char const *argv[])
 
     return 0;
 }
+
